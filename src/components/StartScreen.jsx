@@ -9,8 +9,8 @@ export default function StartScreen({ onStart, onContact }) {
       </div>
 
       <h1 className="start-title">
-        Choose the right tool —<br />
-        <span className="accent">not just the newest one.</span>
+        Playing this game —<br />
+        <span className="accent">Could save you $$$$$$.</span>
       </h1>
 
       <p className="start-sub">
