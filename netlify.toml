@@ -1,0 +1,30 @@
+# Netlify configuration for When To Use AI — Vite 8 + React 19 SPA
+# Docs: https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # Netlify's build image ships pnpm; the lockfile (pnpm-lock.yaml) is committed.
+  command = "pnpm build"
+  publish = "dist"
+
+[build.environment]
+  # Vite 8 requires Node >= 20.19 or >= 22.12. Pin a modern LTS.
+  NODE_VERSION = "22"
+  PNPM_VERSION = "10"
+
+# SPA fallback — the app uses hash routing (#/contact) so this is a
+# safety net only; every route resolves to index.html.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Long-term caching for hashed assets; index.html always revalidated.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
